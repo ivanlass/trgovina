@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,30 +11,39 @@ import NumberPicker from '../NumberPicker/NumberPicker'
 
 
 
-const useStyles = makeStyles({
-    card: {
+
+    const card= {
         maxWidth: 345,
-        display: "inline-block"
-    },
-    media: {
+        display: "inlineBlock"
+    }
+    const media= {
         height: 140,
-    },
-});
+    }
 
 
-export default function MediaCard(props) {
-    const classes = useStyles();
-    const [count, setCounter] = useState(0);
 
+class MediaCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
 
-    const items = props.items.map(item => {
+  itemCount = (e) => {
+      const newCount = e.target.value
+    this.setState({count:newCount})
+    }
+
+render() {
+    const items = this.props.items.map(item => {
         if (item.id < 5) {
             return (
-                <form id={item.id} onSubmit={props.addItem}>
-                    < Card key={item.id} className={classes.card}>
+                <form id={item.id} onSubmit={this.props.addItem} count={this.state.count}>
+                    < Card key={item.id} style={{maxWidth: 345, display: "inline-block"}}>
                         <CardActionArea>
                             <CardMedia
-                                className={classes.media}
+                                style={{ height: 140}}
                                 image="/static/images/cards/contemplative-reptile.jpg"
                                 title="Contemplative Reptile"
                             />
@@ -53,7 +61,7 @@ export default function MediaCard(props) {
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
-                            <NumberPicker itemCount={props.itemCount} />
+                            <NumberPicker itemCount={this.itemCount } />
                             <Button size="small" color="primary">
                                 Discard
                 </Button>
@@ -76,3 +84,6 @@ export default function MediaCard(props) {
 
     )
 }
+}
+
+export default MediaCard

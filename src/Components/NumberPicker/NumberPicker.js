@@ -18,6 +18,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+for (let index = 0; index < 100; index++) {
+    numPickers.push(index)
+
+}
+let numbers = numPickers.map(num => (
+    <option value={num}>{num}</option>
+))
+
 export default function NumberPicker(props) {
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -37,17 +45,11 @@ export default function NumberPicker(props) {
     };
 
 
-    for (let index = 0; index < 100; index++) {
-        numPickers.push(index)
-
-    }
-
-    let numbers = numPickers.map(num => (
-        <option value={num}>{num}</option>
-    ))
 
 
 
+
+    console.log(numPickers)
     return (
         <div>
             <FormControl onChange={props.itemCount} className={classes.formControl}>

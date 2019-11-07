@@ -20,9 +20,7 @@ class App extends React.Component {
   }
 
 
-  itemCount = (e) => {
 
-  }
 
 
   addItemToState = e => {
@@ -52,7 +50,7 @@ class App extends React.Component {
 
     return (
       < div className="App" >
-        <Items items={this.state.itemsFromServer} addItem={this.addItemToState} itemCount={this.itemCount} />
+        <Items items={this.state.itemsFromServer} addItem={this.addItemToState} />
       </div >
     );
 
