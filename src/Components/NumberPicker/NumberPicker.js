@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+
+//array with numbers for quantity
 const numPickers = []
 
 
@@ -18,12 +18,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-for (let index = 0; index < 100; index++) {
+// Adding numbers to array 
+for (let index = 1; index < 50; index++) {
     numPickers.push(index)
 
 }
+
+//making quantity list 
 let numbers = numPickers.map(num => (
-    <option value={num}>{num}</option>
+    <option key={num} value={num}>{num}</option>
 ))
 
 export default function NumberPicker(props) {
@@ -32,9 +35,6 @@ export default function NumberPicker(props) {
         age: '',
         name: 'hai',
     });
-
-    const inputLabel = React.useRef(null);
-    const [labelWidth, setLabelWidth] = React.useState(0);
 
 
     const handleChange = name => event => {
@@ -49,10 +49,9 @@ export default function NumberPicker(props) {
 
 
 
-    console.log(numPickers)
     return (
         <div>
-            <FormControl onChange={props.itemCount} className={classes.formControl}>
+            <FormControl key={props.id} onChange={props.itemCount} className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Kolicina</InputLabel>
                 <Select
                     native
@@ -63,7 +62,7 @@ export default function NumberPicker(props) {
                         id: 'age-native-simple',
                     }}
                 >
-                    <option value="" />
+                    <option key={props.id} value="" />
                     {numbers}
 
                 </Select>
