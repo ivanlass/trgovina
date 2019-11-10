@@ -5,92 +5,75 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NumberPicker from '../NumberPicker/NumberPicker'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        maxWidth: 752,
-    },
-    demo: {
-        backgroundColor: theme.palette.background.paper,
-    },
-    title: {
-        margin: theme.spacing(1, 0, 1),
-    },
-}));
 
-function generate(element) {
-    return [0, 1, 2].map(value =>
-        React.cloneElement(element, {
-            key: value,
-        }),
-    );
-}
 
-export default function BasketList(props) {
-    const classes = useStyles();
-    const [dense, setDense] = React.useState(false);
-    const [secondary, setSecondary] = React.useState(false);
 
-    const list = props.orders.map(listItem => (
-        <ListItem>
-            <ListItemText
-                primary={listItem.title.slice(0, 10)}
-            />
-            <ListItemText
-                primary={listItem.id}
-            />
-            <ListItemText
-                primary={listItem.count}
-            />
-            <ListItemText
-                primary={listItem.count * listItem.id}
-            />
-            <NumberPicker />
-            <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon />
-                </IconButton>
-            </ListItemSecondaryAction>
-        </ListItem>
-    ))
 
-    return (
-        <div className={classes.root}>
-            <FormGroup row>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={dense}
-                            onChange={event => setDense(event.target.checked)}
-                            value="dense"
-                        />
-                    }
-                    label="Enable dense"
-                />
-            </FormGroup>
+class BasketList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 1
+        };
+    }
 
-            <Grid item xs={12} md={12}>
-                <Typography variant="h6" className={classes.title}>
-                    Avatar with text and icon
+    itemCount = (e) => {
+        const newCount = e.target.value
+        this.setState({ count: newCount })
+    }
+
+    render() {
+        const list = this.props.orders.map(listItem => (
+            <form key={listItem.id} onChange={this.props.addItem} id={listItem.id} data-count={this.state.count}>
+                <ListItem key={listItem.id} style={{ display: "block", marginTop: "10px", background: "white" }}>
+                    <ListItemText
+                        style={{ display: "inline-block" }}
+                        primary={`${listItem.title.slice(0, 10)} \u00A0 `}
+                    />
+                    <ListItemText
+                        style={{ display: "inline-block" }}
+                        secondary={`${listItem.id} KM `}
+                    />
+                    <ListItemText
+                        style={{ display: "block" }}
+                        secondary={`Kolicina: ${listItem.count} `}
+                    />
+                    <ListItemText
+                        style={{ display: "block" }}
+                        secondary={`Ukupno: ${listItem.count * listItem.id} KM`}
+                    />
+                    <NumberPicker itemCount={this.itemCount} id={listItem.id} />
+                    <ListItemSecondaryAction>
+                        <IconButton id={listItem.id} onClick={this.props.deleteItem} edge="end" aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+            </form >
+        ))
+
+        return (
+            <div style={{ flexGrow: 1, maxWidth: 752 }} >
+
+                <Grid item xs={12} md={12}>
+                    <Typography variant="h6">
+                        Narudzba
           </Typography>
-                <div className={classes.demo}>
-                    <List dense={dense}>
-                        {list}
+                    <div>
+                        <List>
+                            {list}
+                        </List>
+                    </div>
+                </Grid>
 
-
-
-                    </List>
-                </div>
-            </Grid>
-
-        </div >
-    );
+            </div >
+        );
+    }
 }
+
+export default BasketList

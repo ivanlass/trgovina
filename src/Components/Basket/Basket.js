@@ -7,9 +7,12 @@ import BasketList from '../BasketList/BasketList'
 const useStyles = makeStyles({
   list: {
     width: 350,
+    background: "#f5f5f5",
+    height: "100%"
   },
   fullList: {
     width: 'auto',
+    background: "#f5f5f5"
   },
 });
 
@@ -24,7 +27,8 @@ export default function Basket(props) {
       role="presentation"
       onKeyDown={props.toggleBasketHandler}
     >
-      <BasketList orders={props.orders} />
+      <BasketList deleteItem={props.deleteItem} addItem={props.addItem} orders={props.orders} />
+      <p>ukupno {props.total}</p>
     </div>
   );
 
