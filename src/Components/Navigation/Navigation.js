@@ -136,7 +136,7 @@ export default function Navigation(props) {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p onClick={props.toggleBasket}>Notificationssss</p>
+        <p onClick={props.toggleBasket}>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -174,9 +174,9 @@ export default function Navigation(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show new notifications" color="inherit">
+            <IconButton onClick={props.toggleBasket} aria-label="show new notifications" color="inherit">
               <Badge badgeContent={props.itemNumber} color="secondary">
-                <ShoppingCartIcon onClick={props.toggleBasket} />
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton

@@ -47,7 +47,7 @@ class BasketList extends React.Component {
                         style={{ display: "block" }}
                         secondary={`Ukupno: ${listItem.count * listItem.id} KM`}
                     />
-                    <NumberPicker itemCount={this.itemCount} id={listItem.id} />
+                    <NumberPicker defaultValue={this.itemCount} itemCount={this.itemCount} id={listItem.id} />
                     <ListItemSecondaryAction>
                         <IconButton id={listItem.id} onClick={this.props.deleteItem} edge="end" aria-label="delete">
                             <DeleteIcon />

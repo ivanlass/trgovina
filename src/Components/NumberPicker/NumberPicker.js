@@ -31,38 +31,14 @@ let numbers = numPickers.map(num => (
 
 export default function NumberPicker(props) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-    });
-
-
-    const handleChange = name => event => {
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
-    };
-
-
-
-
 
 
     return (
         <div>
             <FormControl key={props.id} onChange={props.itemCount} className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Kolicina</InputLabel>
-                <Select
-                    native
-                    value={state.age}
-                    onChange={handleChange('age')}
-                    inputProps={{
-                        name: 'age',
-                        id: 'age-native-simple',
-                    }}
-                >
-                    <option key={props.id} value="" />
+                <Select native >
+                    <option key={props.id} disabled/>
                     {numbers}
 
                 </Select>
