@@ -5,13 +5,14 @@ import DateFnsUtils from '@date-io/date-fns';
 
 
 function BasicDateTimePicker(props) {
-  const [selectedDate, handleDateChange] = useState(new Date());
+  
   return (
-    <MuiPickersUtilsProvider onClick={props.findDate} date={selectedDate} utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider date={props.selectedDate} utils={DateFnsUtils}>
         <DateTimePicker
-          value={selectedDate}
+        
+          value={props.selectedDate}
           disablePast
-          onChange={handleDateChange}
+          onChange={props.handleDateChange}
           label="Kada zelite preuzeti"
           showTodayButton
       />

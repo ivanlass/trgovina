@@ -13,6 +13,7 @@ class App extends React.Component {
 			orders: [],
 			toggleBasket: false,
 			total: 0,
+			time: ""
 		};
 	}
 	
@@ -32,8 +33,9 @@ class App extends React.Component {
 	}
 
 
-	findDate = () => {
-		console.log("asd")
+	submitPurchase = (e) => {
+		e.preventDefault();
+		console.log(e.target.dataset.date)
 	}
 
 	
@@ -118,7 +120,7 @@ class App extends React.Component {
 			toggleBasket={this.toggleBasketHandler}
 			itemNumber={this.state.orders.length} />
 			<Basket
-			findDate = {this.findDate}
+			submitPurchase = {this.submitPurchase}
 			total={this.state.total}
 			deleteItem={this.deleteItem}
 			addItem={this.addItemToState}
